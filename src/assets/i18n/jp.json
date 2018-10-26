@@ -1,0 +1,25 @@
+{
+  "page01" : {
+    "TITLE" : "シフト希望を募集",
+    "BODY" : "gopro",
+    "pTitle": "シフト希望を募集する期間と締切日時を設定し、スタッフにシフト希望の募集開始をお知らせします。",
+    "inputTitle": "募集期間",
+    "comment": "備考"
+  },
+  "page02" : {
+    "TITLE" : "シフト希望を募集",
+    "BODY" : "gopro"
+  },
+  "page03" : {
+    "TITLE" : "スキル設定",
+    "BODY" : "gopro"
+  },
+  "page04" : {
+    "TITLE" : "スキル設定",
+    "BODY" : "gopro"
+  },
+  "page05" : {
+    "TITLE" : "チーム設定",
+    "BODY" : "gopro"
+  }
+}
