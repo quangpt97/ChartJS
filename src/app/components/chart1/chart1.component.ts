@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild, ViewChildren} from '@angular/core';
-import * as Chart from 'chart.js';
+// import * as Chart from 'chart.js';
 
 
 declare var $: any;
