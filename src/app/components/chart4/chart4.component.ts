@@ -10,7 +10,8 @@ export class Chart4Component implements OnInit {
   chart4: any;
   backgroundColor4 = ['rgba(96, 159, 238, 1)', 'rgba(195, 49, 51, 1)'];
   borderColor4 = ['rgba(96, 159, 238, 1)', 'rgba(195, 49, 51, 1)'];
-
+  data1 = [10, 20, 5, 7, 9, 3, 4, 6, 12, 45, 16];
+  data2 = [4, 6, 12, 5, 7, 11, 45, 19, 26, 12, 23];
   constructor() {
   }
 
@@ -118,7 +119,7 @@ export class Chart4Component implements OnInit {
         datasets: [
           {
             label: '自社',
-            data: [10, 20, 5, 7, 9, 3, 4, 6, 12, 45, 16],
+            data: this.data1,
             backgroundColor: this.backgroundColor4[0],
             borderColor: this.borderColor4[0],
             borderWidth: 1,
@@ -130,7 +131,7 @@ export class Chart4Component implements OnInit {
           },
           {
             label: '平均',
-            data: [4, 6, 12, 5, 7, 11, 45, 19, 26, 12, 23],
+            data: this.data2,
             backgroundColor: this.backgroundColor4[1],
             borderColor: this.borderColor4[1],
             borderWidth: 1,
@@ -148,7 +149,7 @@ export class Chart4Component implements OnInit {
           onComplete: function () {
             const ctx = this.chart.ctx;
             // ctx.fillStyle = this.scale.textColor;
-            console.log(this.data.datasets);
+            // console.log(this.data.datasets);
             let max = this.data.datasets[0]._meta[3].data[0]._model.y;
             this.data.datasets.map(dataset => {
               const top = dataset._meta[3].data[0]._model.y;
@@ -157,12 +158,14 @@ export class Chart4Component implements OnInit {
               }
               // console.log(max);
             });
+            let count = 0;
             this.data.datasets.map(dataset => {
+              count += 5;
               const left = dataset._meta[3].data[0]._model.x;
               // console.log(left);
               const text = dataset.label + '  ';
               ctx.fillStyle = dataset.backgroundColor;
-              ctx.fillText(text, left - 10, max - 40);
+              ctx.fillText(text, left - 20 + count, max - 40);
               // console.log(text);
               // ctx.fillStyle = dataset.backgroundColor;
               // console.log(ctx.fillStyle);
@@ -252,5 +255,12 @@ export class Chart4Component implements OnInit {
       }
     });
   }
+  randomizeData(){
+    const newData1 = this.data1.map(x => Math.floor(Math.random() * 40));
+    const newData2 = this.data2.map(x => Math.floor(Math.random() * 40));
 
+    this.chart4.data.datasets[0].data = newData1;
+    this.chart4.data.datasets[1].data = newData2;
+    this.chart4.update();
+  }
 }
