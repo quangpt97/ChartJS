@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild, ViewChildren} from '@angular/core';
-// import * as Chart from 'chart.js';
+import * as Chart from 'chart.js';
 
 
 declare var $: any;
@@ -13,9 +13,71 @@ export class Chart1Component implements OnInit {
   chart1: any;
   backgroundColor1 = ['rgba(0, 0, 0,0.3)', 'rgba(96, 159, 238, 1)', 'rgba(195, 49, 51, 1)'];
   borderColor1 = ['rgba(0, 0, 0,0.3)', 'rgba(96, 159, 238, 1)', 'rgba(195, 49, 51, 1)'];
+  data1 = [
+    {
+      x: new Date('9/12/2018'), y: 5
+
+    },
+    {
+      x: new Date('10/12/2018'), y: 10
+
+    },
+    {
+      x: new Date('11/12/2018'), y: 21
+    },
+    {
+      x: new Date('12/12/2018'), y: 17
+
+    },
+    {
+      x: new Date('01/12/2019'), y: 32
+
+    }
+  ];
+  data2 = [
+    {
+      x: new Date('09/12/2018'), y: 27
+    },
+    {
+      x: new Date('10/12/2018'), y: 36
+    },
+    {
+      x: new Date('11/12/2018'), y: 12
+
+    },
+    {
+      x: new Date('12/12/2018'), y: 45
+
+    },
+    {
+      x: new Date('01/12/2019'), y: 50
+
+    }
+  ];
+  data3 = [
+    {
+      x: new Date('09/12/2018'), y: 16
+    },
+    {
+      x: new Date('10/12/2018'), y: 29
+    },
+    {
+      x: new Date('11/12/2018'), y: 52
+
+    },
+    {
+      x: new Date('12/12/2018'), y: 34
+
+    },
+    {
+      x: new Date('01/12/2019'), y: 23
+
+    }
+  ];
 
   constructor() {
   }
+
 
   ngOnInit() {
 
@@ -135,14 +197,6 @@ export class Chart1Component implements OnInit {
       if ((positionX + tooltip.caretX) > chartWidth - 70) {
         tooltipEl.style.left = chartWidth - 190 + 'px';
       }
-      // console.log(tooltipEl.style.left);
-      // console.log(tooltipEl.style.right);
-      // console.log(tooltip.caretX);
-      // console.log(tooltip.caretY);
-      // console.log(positionX);
-      // console.log(positionY);
-      // console.log(tooltip);
-      // console.log(this._chart.canvas);
 
     };
     this.chart1 = new Chart('canvas1', {
@@ -151,27 +205,7 @@ export class Chart1Component implements OnInit {
         datasets: [
           {
             label: 'TOP',
-            data: [
-              {
-                x: new Date('9/12/2018'), y: 45
-
-              },
-              {
-                x: new Date('10/12/2018'), y: 12
-
-              },
-              {
-                x: new Date('11/12/2018'), y: 20
-              },
-              {
-                x: new Date('12/12/2018'), y: 30
-
-              },
-              {
-                x: new Date('01/12/2019'), y: 20
-
-              }
-            ],
+            data: this.data1,
             backgroundColor: this.backgroundColor1[0],
             borderColor: this.borderColor1[0],
             borderWidth: 1,
@@ -183,26 +217,7 @@ export class Chart1Component implements OnInit {
           },
           {
             label: '自社',
-            data: [
-              {
-                x: new Date('09/12/2018'), y: 38
-              },
-              {
-                x: new Date('10/12/2018'), y: 17
-              },
-              {
-                x: new Date('11/12/2018'), y: 14
-
-              },
-              {
-                x: new Date('12/12/2018'), y: 25
-
-              },
-              {
-                x: new Date('01/12/2019'), y: 5
-
-              }
-            ],
+            data: this.data2,
             backgroundColor: this.backgroundColor1[1],
             borderColor: this.borderColor1[1],
             borderWidth: 1,
@@ -214,26 +229,7 @@ export class Chart1Component implements OnInit {
           },
           {
             label: '平均',
-            data: [
-              {
-                x: new Date('09/12/2018'), y: 42
-              },
-              {
-                x: new Date('10/12/2018'), y: 30
-              },
-              {
-                x: new Date('11/12/2018'), y: 25
-
-              },
-              {
-                x: new Date('12/12/2018'), y: 13
-
-              },
-              {
-                x: new Date('01/12/2019'), y: 37
-
-              }
-            ],
+            data: this.data3,
             backgroundColor: this.backgroundColor1[2],
             borderColor: this.borderColor1[2],
             borderWidth: 1,
@@ -250,39 +246,25 @@ export class Chart1Component implements OnInit {
           duration: 0,
           onComplete: function () {
             const ctx = this.chart.ctx;
-            // ctx.fillStyle = this.scale.textColor;
-            // console.log(this.data.datasets);
             this.data.datasets.map(dataset => {
               const lastestData = dataset._meta[0].data.length - 1;
               const left = dataset._meta[0].data[lastestData]._model.x;
               const top = dataset._meta[0].data[lastestData]._model.y;
               ctx.fillStyle = dataset.backgroundColor;
               ctx.fillText(dataset.label, left + 10, top + 4);
-              // console.log(ctx.fillStyle);
-              // console.log(dataset.backgroundColor);
-              // console.log(ctx);
             });
           }
         },
         hover: {
           onHover: function (e, el) {
-            // document.getElementById('canvas1').style.cursor = 'pointer';
             $('#canvas1').css('cursor', el[0] ? 'pointer' : 'default');
           }
         },
         responsive: true,
-        // legend: {
-        //   position: 'bottom',
-        //   labels: {
-        //     // boxWidth: 10
-        //   }
-        // },
         legend: {
           display: false,
           position: 'bottom',
-          labels: {
-            // boxWidth: 10
-          }
+          labels: {}
         },
         plugins: {
           datalabels: {
@@ -293,7 +275,6 @@ export class Chart1Component implements OnInit {
           },
         },
         scales: {
-          // scaleLabel: '<%= \' \' + value%> %',
           yAxes: [{
             ticks: {
               beginAtZero: true,
@@ -306,7 +287,6 @@ export class Chart1Component implements OnInit {
             gridLines: {
               display: true,
               drawBorder: false,
-              // display:true,
               zeroLineWidth: 1,
               zeroLineColor: '#f5f4f0',
               color: '#f5f4f0',
@@ -323,7 +303,6 @@ export class Chart1Component implements OnInit {
               unit: 'month',
               displayFormats: {
                 'month': 'M月',
-                // quarter: 'YYYY'
               },
               tooltipFormat: 'YYYY年MM月DD日',
               round: 'month',
@@ -346,28 +325,78 @@ export class Chart1Component implements OnInit {
             label: function (tooltipItem, data) {
               const dataset = data.datasets[tooltipItem.datasetIndex];
               const dslabelamtY = dataset.data[tooltipItem.index]['y'];
-              // console.log(tooltipItem);
-              // console.log(data);
               return data.datasets[tooltipItem.datasetIndex].label + ' ' + dslabelamtY + '%';
             },
 
           },
-          // position: 'nearest',
           mode: 'point',
           yPadding: 10,
           xPadding: 10,
           caretSize: 4,
           intersect: false,
-          // backgroundColor: 'rgba(255,99,132,1)',
-          // borderColor: 'red',
           displayColors: false,
           borderWidth: 2,
           enabled: false
-          // bodyFontColor: 'rgba(255,99,132,1)',
-          // titleFontColor: 'rgba(255,99,132,1)',
         },
-      },
+      }
     });
   }
 
+  randomizeData() {
+    const newData1 = [
+      {
+        x: '9/12/2018', y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: '10/12/2018', y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: '11/12/2018', y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: '12/12/2018', y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: '1/12/2019', y: Math.floor(Math.random() * 60)
+      }
+    ];
+    const newData2 = [
+      {
+        x: '9/12/2018', y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: '10/12/2018', y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: '11/12/2018', y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: '12/12/2018', y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: '1/12/2019', y: Math.floor(Math.random() * 60)
+      }
+    ];
+    const newData3 = [
+      {
+        x: '9/12/2018', y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: '10/12/2018', y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: '11/12/2018', y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: '12/12/2018', y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: '1/12/2019', y: Math.floor(Math.random() * 60)
+      }
+    ];
+    this.chart1.data.datasets[0].data = newData1;
+    this.chart1.data.datasets[1].data = newData2;
+    this.chart1.data.datasets[2].data = newData3;
+    this.chart1.update();
+  }
 }
