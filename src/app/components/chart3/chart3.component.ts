@@ -123,6 +123,7 @@ export class Chart3Component implements OnInit {
         },
         responsive: true,
         legend: {
+          display: false,
           position: 'bottom',
           labels: {
             boxWidth: 0
