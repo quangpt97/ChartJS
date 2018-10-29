@@ -12,6 +12,7 @@ export class Chart4Component implements OnInit {
   borderColor4 = ['rgba(96, 159, 238, 1)', 'rgba(195, 49, 51, 1)'];
   data1 = [10, 20, 5, 7, 9, 3, 4, 6, 12, 45, 16];
   data2 = [4, 6, 12, 5, 7, 11, 45, 19, 26, 12, 23];
+
   constructor() {
   }
 
@@ -255,7 +256,8 @@ export class Chart4Component implements OnInit {
       }
     });
   }
-  randomizeData(){
+
+  randomizeData() {
     const newData1 = this.data1.map(x => Math.floor(Math.random() * 40));
     const newData2 = this.data2.map(x => Math.floor(Math.random() * 40));
 
