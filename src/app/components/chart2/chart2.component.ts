@@ -322,7 +322,7 @@ export class Chart2Component implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              padding: 20,
+              padding: 30,
               callback: function (value) {
                 return '    ' + value + '件';
               },
