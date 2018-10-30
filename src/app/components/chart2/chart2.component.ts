@@ -334,7 +334,7 @@ export class Chart2Component implements OnInit {
               zeroLineWidth: 1,
               zeroLineColor: '#f5f4f0',
               color: '#f5f4f0',
-              tickMarkLength: 40,
+              tickMarkLength: 30,
               drawTicks: true
             },
           }],
