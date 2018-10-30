@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild, ViewChildren} from '@angular/core';
 // import * as Chart from 'chart.js';
 
 
-declare var $: any;
+// declare var $: any;
 
 @Component({
   selector: 'app-chart1',
@@ -267,7 +267,7 @@ export class Chart1Component implements OnInit {
         },
         hover: {
           onHover: function (e, el) {
-            $('#canvas1').css('cursor', el[0] ? 'pointer' : 'default');
+            // $('#canvas1').css('cursor', el[0] ? 'pointer' : 'default');
           }
         },
         responsive: true,
