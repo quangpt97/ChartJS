@@ -13,6 +13,10 @@ export class Chart1Component implements OnInit {
   chart1: any;
   backgroundColor1 = ['rgba(0, 0, 0,0.3)', 'rgba(96, 159, 238, 1)', 'rgba(195, 49, 51, 1)'];
   borderColor1 = ['rgba(0, 0, 0,0.3)', 'rgba(96, 159, 238, 1)', 'rgba(195, 49, 51, 1)'];
+  today = new Date();
+  currentYear = this.today.getFullYear();
+  currentMonth = 9;
+  currentMonthNext = 1;
   data1 = [
     {
       x: new Date('9/12/2018'), y: 5
@@ -107,24 +111,29 @@ export class Chart1Component implements OnInit {
       }
     });
     const customTooltips = function (tooltip) {
-      const borderColor1 = ['rgba(0,0,0,0.5)', 'rgba(96, 159, 238, 1)', 'rgba(195, 49, 51, 1)'];
+      const borderColor2 = ['rgba(0, 0, 0,0.3)', 'rgba(96, 159, 238, 1)', 'rgba(195, 49, 51, 1)'];
       let tooltipEl = document.querySelector('.tooltip') as HTMLElement;
       if (tooltip.dataPoints) {
         if (tooltip.dataPoints[0].datasetIndex === 0) {
           tooltip.backgroundColor = '#fff';
-          tooltip.titleFontColor = borderColor1[0];
-          tooltip.labelTextColors[0] = borderColor1[0];
-          tooltip.borderColor = borderColor1[0];
+          tooltip.titleFontColor = borderColor2[0];
+          tooltip.labelTextColors[0] = borderColor2[0];
+          tooltip.borderColor = borderColor2[0];
         } else if (tooltip.dataPoints[0].datasetIndex === 1) {
           tooltip.backgroundColor = '#fff';
-          tooltip.borderColor = borderColor1[1];
-          tooltip.titleFontColor = borderColor1[1];
-          tooltip.labelTextColors[0] = borderColor1[1];
+          tooltip.borderColor = borderColor2[1];
+          tooltip.titleFontColor = borderColor2[1];
+          tooltip.labelTextColors[0] = borderColor2[1];
         } else if (tooltip.dataPoints[0].datasetIndex === 2) {
           tooltip.backgroundColor = '#fff';
-          tooltip.borderColor = borderColor1[2];
-          tooltip.titleFontColor = borderColor1[2];
-          tooltip.labelTextColors[0] = borderColor1[2];
+          tooltip.borderColor = borderColor2[2];
+          tooltip.titleFontColor = borderColor2[2];
+          tooltip.labelTextColors[0] = borderColor2[2];
+        } else if (tooltip.dataPoints[0].datasetIndex === 3) {
+          tooltip.backgroundColor = '#fff';
+          tooltip.borderColor = borderColor2[3];
+          tooltip.titleFontColor = borderColor2[3];
+          tooltip.labelTextColors[0] = borderColor2[3];
         }
         // console.log(tooltip);
       }
@@ -302,7 +311,7 @@ export class Chart1Component implements OnInit {
             time: {
               unit: 'month',
               displayFormats: {
-                'month': 'M月',
+                'month': 'M月Y',
               },
               tooltipFormat: 'YYYY年MM月DD日',
               round: 'month',
@@ -342,61 +351,223 @@ export class Chart1Component implements OnInit {
     });
   }
 
-  randomizeData() {
+  randomizeDataBack() {
+
+    let currentYear = this.currentYear;
+
+    console.log(this.currentYear);
+
+    if (this.currentMonth - 5 > 0) {
+      this.currentMonth -= 5;
+    } else {
+      this.currentMonth = 12 + this.currentMonth - 5;
+      currentYear -= 1;
+    }
+    console.log(this.currentMonth);
+
+    let currentMonth1 = this.currentMonth + 1;
+    let currentMonth2 = this.currentMonth + 2;
+    let currentMonth3 = this.currentMonth + 3;
+    let currentMonth4 = this.currentMonth + 4;
+    let currentYear1 = this.currentYear;
+    let currentYear2 = this.currentYear;
+    let currentYear3 = this.currentYear;
+    let currentYear4 = this.currentYear;
+    if (currentMonth1 >= 12 || currentMonth2 >= 12 || currentMonth3 >= 12 || currentMonth4 >= 12) {
+      currentYear1 -= 1;
+      currentYear2 -= 1;
+      currentYear3 -= 1;
+      currentYear4 -= 1;
+      if (currentMonth1 > 12) {
+        currentMonth1 = currentMonth1 - 12;
+        currentYear1 += 1;
+      }
+      if (currentMonth2 > 12) {
+        currentMonth2 = currentMonth2 - 12;
+        currentYear2 += 1;
+
+      }
+      if (currentMonth3 > 12) {
+        currentMonth3 = currentMonth3 - 12;
+        currentYear3 += 1;
+      }
+      if (currentMonth4 > 12) {
+        currentMonth4 = currentMonth4 - 12;
+        currentYear4 += 1;
+      }
+    }
+    console.log(currentYear1);
+    console.log(currentYear2);
+    console.log(currentYear3);
+    console.log(currentYear4);
+    console.log(currentYear);
+
     const newData1 = [
       {
-        x: '9/12/2018', y: Math.floor(Math.random() * 60)
+        x: this.currentMonth + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
       },
       {
-        x: '10/12/2018', y: Math.floor(Math.random() * 60)
+        x: currentMonth1 + '/12/' + currentYear1, y: Math.floor(Math.random() * 60)
       },
       {
-        x: '11/12/2018', y: Math.floor(Math.random() * 60)
+        x: currentMonth2 + '/12/' + currentYear2, y: Math.floor(Math.random() * 60)
       },
       {
-        x: '12/12/2018', y: Math.floor(Math.random() * 60)
+        x: currentMonth3 + '/12/' + currentYear3, y: Math.floor(Math.random() * 60)
       },
       {
-        x: '1/12/2019', y: Math.floor(Math.random() * 60)
+        x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 60)
       }
     ];
     const newData2 = [
       {
-        x: '9/12/2018', y: Math.floor(Math.random() * 60)
+        x: this.currentMonth + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
       },
       {
-        x: '10/12/2018', y: Math.floor(Math.random() * 60)
+        x: currentMonth1 + '/12/' + currentYear1, y: Math.floor(Math.random() * 60)
       },
       {
-        x: '11/12/2018', y: Math.floor(Math.random() * 60)
+        x: currentMonth2 + '/12/' + currentYear2, y: Math.floor(Math.random() * 60)
       },
       {
-        x: '12/12/2018', y: Math.floor(Math.random() * 60)
+        x: currentMonth3 + '/12/' + currentYear3, y: Math.floor(Math.random() * 60)
       },
       {
-        x: '1/12/2019', y: Math.floor(Math.random() * 60)
+        x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 60)
       }
     ];
     const newData3 = [
       {
-        x: '9/12/2018', y: Math.floor(Math.random() * 60)
+        x: this.currentMonth + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
       },
       {
-        x: '10/12/2018', y: Math.floor(Math.random() * 60)
+        x: currentMonth1 + '/12/' + currentYear1, y: Math.floor(Math.random() * 60)
       },
       {
-        x: '11/12/2018', y: Math.floor(Math.random() * 60)
+        x: currentMonth2 + '/12/' + currentYear2, y: Math.floor(Math.random() * 60)
       },
       {
-        x: '12/12/2018', y: Math.floor(Math.random() * 60)
+        x: currentMonth3 + '/12/' + currentYear3, y: Math.floor(Math.random() * 60)
       },
       {
-        x: '1/12/2019', y: Math.floor(Math.random() * 60)
+        x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 60)
       }
     ];
     this.chart1.data.datasets[0].data = newData1;
     this.chart1.data.datasets[1].data = newData2;
     this.chart1.data.datasets[2].data = newData3;
+    console.log(newData1, newData2, newData3);
     this.chart1.update();
+    this.currentYear = Math.min(currentYear, currentYear1, currentYear2, currentYear3, currentYear4);
+  }
+
+  randomizeDataNext() {
+
+    let currentYear = this.currentYear;
+
+    console.log(this.currentYear);
+
+    if (this.currentMonthNext + 5 <= 12) {
+      this.currentMonthNext += 5;
+    } else {
+      this.currentMonthNext = this.currentMonthNext + 5 - 12;
+      currentYear += 1;
+    }
+    console.log(this.currentMonthNext);
+
+    let currentMonth1 = this.currentMonthNext - 4;
+    let currentMonth2 = this.currentMonthNext - 3;
+    let currentMonth3 = this.currentMonthNext - 2;
+    let currentMonth4 = this.currentMonthNext - 1;
+    let currentYear1 = this.currentYear;
+    let currentYear2 = this.currentYear;
+    let currentYear3 = this.currentYear;
+    let currentYear4 = this.currentYear;
+    if (currentMonth1 <= 1 || currentMonth2 <= 1 || currentMonth3 <= 1 || currentMonth4 <= 1) {
+      currentYear1 += 1;
+      currentYear2 += 1;
+      currentYear3 += 1;
+      currentYear4 += 1;
+      if (currentMonth1 < 1) {
+        currentMonth1 = 12 - Math.abs(currentMonth1);
+        currentYear1 -= 1;
+      }
+      if (currentMonth2 < 1) {
+        currentMonth2 = 12 - Math.abs(currentMonth2);
+        currentYear2 -= 1;
+
+      }
+      if (currentMonth3 < 1) {
+        currentMonth3 = 12 - Math.abs(currentMonth3);
+        currentYear3 -= 1;
+      }
+      if (currentMonth4 < 1) {
+        currentMonth4 = 12 - Math.abs(currentMonth4);
+        currentYear4 -= 1;
+      }
+    }
+    console.log(currentYear1);
+    console.log(currentYear2);
+    console.log(currentYear3);
+    console.log(currentYear4);
+    console.log(currentYear);
+
+    const newData1 = [
+      {
+        x: currentMonth1 + '/12/' + currentYear1, y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: currentMonth2 + '/12/' + currentYear2, y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: currentMonth3 + '/12/' + currentYear3, y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: this.currentMonthNext + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
+      }
+    ];
+    const newData2 = [
+      {
+        x: currentMonth1 + '/12/' + currentYear1, y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: currentMonth2 + '/12/' + currentYear2, y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: currentMonth3 + '/12/' + currentYear3, y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: this.currentMonthNext + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
+      }
+    ];
+    const newData3 = [
+      {
+        x: currentMonth1 + '/12/' + currentYear1, y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: currentMonth2 + '/12/' + currentYear2, y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: currentMonth3 + '/12/' + currentYear3, y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 60)
+      },
+      {
+        x: this.currentMonthNext + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
+      }
+    ];
+    this.chart1.data.datasets[0].data = newData1;
+    this.chart1.data.datasets[1].data = newData2;
+    this.chart1.data.datasets[2].data = newData3;
+    console.log(newData1, newData2, newData3);
+    this.chart1.update();
+    this.currentYear = Math.max(currentYear, currentYear1, currentYear2, currentYear3, currentYear4);
   }
 }
