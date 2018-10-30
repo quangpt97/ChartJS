@@ -16,7 +16,8 @@ export class Chart1Component implements OnInit {
   today = new Date();
   currentYear = this.today.getFullYear();
   currentMonth = 9;
-  currentMonthNext = 1;
+  clickBack = 0;
+  clickNext = 0;
   data1 = [
     {
       x: new Date('9/12/2018'), y: 5
@@ -352,9 +353,18 @@ export class Chart1Component implements OnInit {
   }
 
   randomizeDataBack() {
-
+    if (this.clickBack === 0 && this.clickNext === 1) {
+      if (this.currentMonth - 4 > 0) {
+        this.currentMonth -= 4;
+      } else {
+        this.currentMonth = 12 - Math.abs(this.currentMonth - 4);
+        this.currentYear -= 1;
+      }
+    }
+    this.clickBack = 1;
+    this.clickNext = 0;
     let currentYear = this.currentYear;
-
+    console.log(this.currentMonth);
     console.log(this.currentYear);
 
     if (this.currentMonth - 5 > 0) {
@@ -462,23 +472,38 @@ export class Chart1Component implements OnInit {
   }
 
   randomizeDataNext() {
+    if (this.clickBack === 0 && this.clickNext === 0) {
+      this.currentMonth = 1;
+      this.currentYear = 2019;
+    }
+    if (this.clickBack === 1 && this.clickNext === 0) {
+      if (this.currentMonth + 4 <= 12) {
+        this.currentMonth += 4;
+      } else {
+        this.currentMonth = this.currentMonth - 8;
+        this.currentYear += 1;
+      }
+    }
+    this.clickNext = 1;
+    this.clickBack = 0;
 
+    console.log(this.currentMonth);
     let currentYear = this.currentYear;
 
     console.log(this.currentYear);
 
-    if (this.currentMonthNext + 5 <= 12) {
-      this.currentMonthNext += 5;
+    if (this.currentMonth + 5 <= 12) {
+      this.currentMonth += 5;
     } else {
-      this.currentMonthNext = this.currentMonthNext + 5 - 12;
+      this.currentMonth = this.currentMonth + 5 - 12;
       currentYear += 1;
     }
-    console.log(this.currentMonthNext);
+    console.log(this.currentMonth);
 
-    let currentMonth1 = this.currentMonthNext - 4;
-    let currentMonth2 = this.currentMonthNext - 3;
-    let currentMonth3 = this.currentMonthNext - 2;
-    let currentMonth4 = this.currentMonthNext - 1;
+    let currentMonth1 = this.currentMonth - 4;
+    let currentMonth2 = this.currentMonth - 3;
+    let currentMonth3 = this.currentMonth - 2;
+    let currentMonth4 = this.currentMonth - 1;
     let currentYear1 = this.currentYear;
     let currentYear2 = this.currentYear;
     let currentYear3 = this.currentYear;
@@ -526,7 +551,7 @@ export class Chart1Component implements OnInit {
         x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 60)
       },
       {
-        x: this.currentMonthNext + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
+        x: this.currentMonth + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
       }
     ];
     const newData2 = [
@@ -543,7 +568,7 @@ export class Chart1Component implements OnInit {
         x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 60)
       },
       {
-        x: this.currentMonthNext + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
+        x: this.currentMonth + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
       }
     ];
     const newData3 = [
@@ -560,7 +585,7 @@ export class Chart1Component implements OnInit {
         x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 60)
       },
       {
-        x: this.currentMonthNext + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
+        x: this.currentMonth + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
       }
     ];
     this.chart1.data.datasets[0].data = newData1;
