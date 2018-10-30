@@ -322,7 +322,7 @@ export class Chart2Component implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              padding: 20,
+              padding: 25,
               callback: function (value) {
                 return '    ' + value + '件';
               },
@@ -334,7 +334,7 @@ export class Chart2Component implements OnInit {
               zeroLineWidth: 1,
               zeroLineColor: '#f5f4f0',
               color: '#f5f4f0',
-              tickMarkLength: 30,
+              tickMarkLength: 25,
               drawTicks: true
             },
           }],
