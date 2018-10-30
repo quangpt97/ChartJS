@@ -1,16 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewChildren} from '@angular/core';
 // import * as Chart from 'chart.js';
 
 
+// declare var $: any;
+
 @Component({
-  selector: 'app-chart2',
-  templateUrl: './chart2.component.html',
-  styleUrls: ['./chart2.component.scss']
+  selector: 'app-chart1',
+  templateUrl: './chart1.component.html',
+  styleUrls: ['./chart1.component.scss']
 })
-export class Chart2Component implements OnInit {
-  chart2: any;
-  backgroundColor2 = ['rgba(0, 0, 0,0.5)', 'rgba(196, 123, 45,1)', 'rgba(255, 206, 86, 1)', 'rgba(31, 239, 236,1)'];
-  borderColor2 = ['rgba(0, 0, 0,0.5)', 'rgba(196, 123, 45,1)', 'rgba(255, 206, 86, 1)', 'rgba(31, 239, 236,1)'];
+export class Chart1Component implements OnInit {
+  chart1: any;
+  backgroundColor1 = ['rgba(0, 0, 0,0.3)', 'rgba(96, 159, 238, 1)', 'rgba(195, 49, 51, 1)'];
+  borderColor1 = ['rgba(0, 0, 0,0.3)', 'rgba(96, 159, 238, 1)', 'rgba(195, 49, 51, 1)'];
   today = new Date();
   currentYear = this.today.getFullYear();
   currentMonth = 9;
@@ -18,82 +20,62 @@ export class Chart2Component implements OnInit {
   clickNext = 0;
   data1 = [
     {
-      x: new Date('9/12/2018'), y: 1200
+      x: new Date('9/12/2018'), y: 5
 
     },
     {
-      x: new Date('10/12/2018'), y: 1200
+      x: new Date('10/12/2018'), y: 10
 
     },
     {
-      x: new Date('11/12/2018'), y: 2000
+      x: new Date('11/12/2018'), y: 21
     },
     {
-      x: new Date('12/12/2018'), y: 1400
+      x: new Date('12/12/2018'), y: 17
 
     },
     {
-      x: new Date('01/12/2019'), y: 1325
+      x: new Date('01/12/2019'), y: 32
 
     }
   ];
   data2 = [
     {
-      x: new Date('09/12/2018'), y: 1800
+      x: new Date('09/12/2018'), y: 27
     },
     {
-      x: new Date('10/12/2018'), y: 1700
+      x: new Date('10/12/2018'), y: 36
     },
     {
-      x: new Date('11/12/2018'), y: 1400
+      x: new Date('11/12/2018'), y: 12
 
     },
     {
-      x: new Date('12/12/2018'), y: 2220
+      x: new Date('12/12/2018'), y: 45
 
     },
     {
-      x: new Date('01/12/2019'), y: 2590
+      x: new Date('01/12/2019'), y: 50
 
     }
   ];
   data3 = [
     {
-      x: new Date('09/12/2018'), y: 1460
+      x: new Date('09/12/2018'), y: 16
     },
     {
-      x: new Date('10/12/2018'), y: 880
+      x: new Date('10/12/2018'), y: 29
     },
     {
-      x: new Date('11/12/2018'), y: 1400
+      x: new Date('11/12/2018'), y: 52
 
     },
     {
-      x: new Date('12/12/2018'), y: 2540
+      x: new Date('12/12/2018'), y: 34
 
     },
     {
-      x: new Date('01/12/2019'), y: 2000
-
-    }
-  ];
-  data4 = [
-    {
-      x: new Date('09/12/2018'), y: 1060
-    },
-    {
-      x: new Date('10/12/2018'), y: 3000
-    },
-    {
-      x: new Date('11/12/2018'), y: 2000
-
-    },
-    {
-      x: new Date('12/12/2018'), y: 1300
-
-    },
-    {
-      x: new Date('01/12/2019'), y: 3700
+      x: new Date('01/12/2019'), y: 23
 
     }
   ];
@@ -101,8 +83,10 @@ export class Chart2Component implements OnInit {
   constructor() {
   }
 
+
   ngOnInit() {
 
+    // Chart.defaults.line.showLines = true;
     Chart.defaults.LineWithLine = Chart.defaults.line;
     Chart.controllers.LineWithLine = Chart.controllers.line.extend({
       draw: function (ease) {
@@ -128,7 +112,7 @@ export class Chart2Component implements OnInit {
       }
     });
     const customTooltips = function (tooltip) {
-      const borderColor2 = ['rgba(0, 0, 0,0.5)', 'rgba(196, 123, 45,1)', 'rgba(255, 206, 86, 1)', 'rgba(31, 239, 236,1)'];
+      const borderColor2 = ['rgba(0, 0, 0,0.3)', 'rgba(96, 159, 238, 1)', 'rgba(195, 49, 51, 1)'];
       let tooltipEl = document.querySelector('.tooltip') as HTMLElement;
       if (tooltip.dataPoints) {
         if (tooltip.dataPoints[0].datasetIndex === 0) {
@@ -136,7 +120,6 @@ export class Chart2Component implements OnInit {
           tooltip.titleFontColor = borderColor2[0];
           tooltip.labelTextColors[0] = borderColor2[0];
           tooltip.borderColor = borderColor2[0];
-
         } else if (tooltip.dataPoints[0].datasetIndex === 1) {
           tooltip.backgroundColor = '#fff';
           tooltip.borderColor = borderColor2[1];
@@ -221,63 +204,51 @@ export class Chart2Component implements OnInit {
       tooltipEl.style.fontStyle = tooltip._bodyFontStyle;
       tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
       // console.log(chartWidth);
-      if ((positionX + tooltip.caretX) > chartWidth - 100) {
+      if ((positionX + tooltip.caretX) > chartWidth - 70) {
         tooltipEl.style.left = chartWidth - 190 + 'px';
       }
 
     };
-    this.chart2 = new Chart('canvas2', {
+    this.chart1 = new Chart('canvas1', {
       type: 'LineWithLine',
       data: {
         datasets: [
           {
-            label: `TOP 送信`,
+            label: 'TOP',
             data: this.data1,
-            backgroundColor: this.backgroundColor2[0],
-            borderColor: this.borderColor2[0],
+            backgroundColor: this.backgroundColor1[0],
+            borderColor: this.borderColor1[0],
             borderWidth: 1,
             fill: false,
             lineTension: 0,
             pointBorderWidth: 1,
-            pointBorderColor: this.borderColor2[0],
-            pointBackgroundColor: this.borderColor2[0],
+            pointBorderColor: this.borderColor1[0],
+            pointBackgroundColor: this.borderColor1[0],
           },
           {
-            label: 'TOP 受信',
+            label: '自社',
             data: this.data2,
-            backgroundColor: this.backgroundColor2[1],
-            borderColor: this.borderColor2[1],
+            backgroundColor: this.backgroundColor1[1],
+            borderColor: this.borderColor1[1],
             borderWidth: 1,
             fill: false,
             lineTension: 0,
             pointBorderWidth: 1,
-            pointBorderColor: this.borderColor2[1],
-            pointBackgroundColor: this.borderColor2[1],
+            pointBorderColor: this.borderColor1[1],
+            pointBackgroundColor: this.borderColor1[1],
           },
           {
-            label: '送信',
+            label: '平均',
             data: this.data3,
-            backgroundColor: this.backgroundColor2[2],
-            borderColor: this.borderColor2[2],
+            backgroundColor: this.backgroundColor1[2],
+            borderColor: this.borderColor1[2],
             borderWidth: 1,
             fill: false,
             lineTension: 0,
             pointBorderWidth: 1,
-            pointBorderColor: this.borderColor2[2],
-            pointBackgroundColor: this.borderColor2[2],
+            pointBorderColor: this.borderColor1[2],
+            pointBackgroundColor: this.borderColor1[2],
           },
-          {
-            label: '受信',
-            data: this.data4,
-            backgroundColor: this.backgroundColor2[3],
-            borderColor: this.borderColor2[3],
-            borderWidth: 1,
-            fill: false,
-            lineTension: 0,
-            pointBorderWidth: 1,
-            pointBorderColor: this.borderColor2[3],
-            pointBackgroundColor: this.borderColor2[3],
-          }
         ]
       },
       options: {
@@ -286,9 +257,9 @@ export class Chart2Component implements OnInit {
           onComplete: function () {
             const ctx = this.chart.ctx;
             this.data.datasets.map(dataset => {
-              const lastestData = dataset._meta[1].data.length - 1;
-              const left = dataset._meta[1].data[lastestData]._model.x;
-              const top = dataset._meta[1].data[lastestData]._model.y;
+              const lastestData = dataset._meta[0].data.length - 1;
+              const left = dataset._meta[0].data[lastestData]._model.x;
+              const top = dataset._meta[0].data[lastestData]._model.y;
               ctx.fillStyle = dataset.backgroundColor;
               ctx.fillText(dataset.label, left + 10, top + 4);
             });
@@ -296,33 +267,30 @@ export class Chart2Component implements OnInit {
         },
         hover: {
           onHover: function (e, el) {
+            // $('#canvas1').css('cursor', el[0] ? 'pointer' : 'default');
           }
-        },
-        onHover: function () {
         },
         responsive: true,
         legend: {
           display: false,
           position: 'bottom',
-          labels: {
-            boxWidth: 0
-          }
+          labels: {}
         },
         plugins: {
           datalabels: {
             display: function (context) {
               return context.chart.isDatasetVisible(context.datasetIndex);
             }
+
           },
         },
         scales: {
-          // scaleLabel: '<%= \' \' + value%> %',
           yAxes: [{
             ticks: {
               beginAtZero: true,
               padding: 10,
               callback: function (value) {
-                return '    ' + value + '件';
+                return '    ' + value + '%';
               },
             },
             position: 'right',
@@ -345,7 +313,6 @@ export class Chart2Component implements OnInit {
               unit: 'month',
               displayFormats: {
                 'month': 'M月Y',
-                quarter: 'YYYY'
               },
               tooltipFormat: 'YYYY年MM月DD日',
               round: 'month',
@@ -356,30 +323,19 @@ export class Chart2Component implements OnInit {
               fontSize: 30,
             },
             gridLines: {
-              offsetGridLines: true,
-              display: false
-            },
+              offsetGridLines: false,
+              display: false,
+              borderDash: [8, 4],
+            }
           }]
         },
         tooltips: {
           custom: customTooltips,
           callbacks: {
-            labelColor: function (tooltipItem, chart) {
-              const dataset = chart.config.data.datasets[tooltipItem.datasetIndex];
-              // console.log(dataset);
-              return {
-                borderColor: 'green',
-                backgroundColor: 'black'
-              };
-            },
             label: function (tooltipItem, data) {
               const dataset = data.datasets[tooltipItem.datasetIndex];
               const dslabelamtY = dataset.data[tooltipItem.index]['y'];
-              if (dataset.label === 'TOP') {
-              }
-              // console.log(tooltipItem);
-              // console.log(data);
-              return data.datasets[tooltipItem.datasetIndex].label + '   ' + dslabelamtY + '件';
+              return data.datasets[tooltipItem.datasetIndex].label + ' ' + dslabelamtY + '%';
             },
 
           },
@@ -388,14 +344,10 @@ export class Chart2Component implements OnInit {
           xPadding: 10,
           caretSize: 4,
           intersect: false,
-          // backgroundColor: 'rgba(255,99,132,1)',
-          // borderColor: 'red',
           displayColors: false,
           borderWidth: 2,
           enabled: false
-          // bodyFontColor: 'rgba(255,99,132,1)',
-          // titleFontColor: 'rgba(255,99,132,1)',
-        }
+        },
       }
     });
   }
@@ -462,78 +414,63 @@ export class Chart2Component implements OnInit {
 
     const newData1 = [
       {
-        x: this.currentMonth + '/12/' + currentYear, y: Math.floor(Math.random() * 2000)
+        x: this.currentMonth + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
       },
       {
-        x: currentMonth1 + '/12/' + currentYear1, y: Math.floor(Math.random() * 2000)
+        x: currentMonth1 + '/12/' + currentYear1, y: Math.floor(Math.random() * 60)
       },
       {
-        x: currentMonth2 + '/12/' + currentYear2, y: Math.floor(Math.random() * 2000)
+        x: currentMonth2 + '/12/' + currentYear2, y: Math.floor(Math.random() * 60)
       },
       {
-        x: currentMonth3 + '/12/' + currentYear3, y: Math.floor(Math.random() * 2000)
+        x: currentMonth3 + '/12/' + currentYear3, y: Math.floor(Math.random() * 60)
       },
       {
-        x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 2000)
+        x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 60)
       }
     ];
     const newData2 = [
       {
-        x: this.currentMonth + '/12/' + currentYear, y: Math.floor(Math.random() * 2000)
+        x: this.currentMonth + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
       },
       {
-        x: currentMonth1 + '/12/' + currentYear1, y: Math.floor(Math.random() * 2000)
+        x: currentMonth1 + '/12/' + currentYear1, y: Math.floor(Math.random() * 60)
       },
       {
-        x: currentMonth2 + '/12/' + currentYear2, y: Math.floor(Math.random() * 2000)
+        x: currentMonth2 + '/12/' + currentYear2, y: Math.floor(Math.random() * 60)
       },
       {
-        x: currentMonth3 + '/12/' + currentYear3, y: Math.floor(Math.random() * 2000)
+        x: currentMonth3 + '/12/' + currentYear3, y: Math.floor(Math.random() * 60)
       },
       {
-        x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 2000)
+        x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 60)
       }
     ];
     const newData3 = [
       {
-        x: this.currentMonth + '/12/' + currentYear, y: Math.floor(Math.random() * 2000)
+        x: this.currentMonth + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
       },
       {
-        x: currentMonth1 + '/12/' + currentYear1, y: Math.floor(Math.random() * 2000)
+        x: currentMonth1 + '/12/' + currentYear1, y: Math.floor(Math.random() * 60)
       },
       {
-        x: currentMonth2 + '/12/' + currentYear2, y: Math.floor(Math.random() * 2000)
+        x: currentMonth2 + '/12/' + currentYear2, y: Math.floor(Math.random() * 60)
       },
       {
-        x: currentMonth3 + '/12/' + currentYear3, y: Math.floor(Math.random() * 2000)
+        x: currentMonth3 + '/12/' + currentYear3, y: Math.floor(Math.random() * 60)
       },
       {
-        x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 2000)
+        x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 60)
       }
     ];
-    const newData4 = [
-      {
-        x: this.currentMonth + '/12/' + currentYear, y: Math.floor(Math.random() * 2000)
-      },
-      {
-        x: currentMonth1 + '/12/' + currentYear1, y: Math.floor(Math.random() * 2000)
-      },
-      {
-        x: currentMonth2 + '/12/' + currentYear2, y: Math.floor(Math.random() * 2000)
-      },
-      {
-        x: currentMonth3 + '/12/' + currentYear3, y: Math.floor(Math.random() * 2000)
-      },
-      {
-        x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 2000)
-      }
-    ];
-    this.chart2.data.datasets[0].data = newData1;
-    this.chart2.data.datasets[1].data = newData2;
-    this.chart2.data.datasets[2].data = newData3;
-    this.chart2.data.datasets[3].data = newData4;
-    this.chart2.update();
+    this.chart1.data.datasets[0].data = newData1;
+    this.chart1.data.datasets[1].data = newData2;
+    this.chart1.data.datasets[2].data = newData3;
+    console.log(newData1, newData2, newData3);
+    this.chart1.update();
+    this.currentYear = Math.min(currentYear, currentYear1, currentYear2, currentYear3, currentYear4);
   }
+
   randomizeDataNext() {
     if (this.clickBack === 0 && this.clickNext === 0) {
       this.currentMonth = 1;
@@ -651,28 +588,11 @@ export class Chart2Component implements OnInit {
         x: this.currentMonth + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
       }
     ];
-    const newData4 = [
-      {
-        x: currentMonth1 + '/12/' + currentYear1, y: Math.floor(Math.random() * 60)
-      },
-      {
-        x: currentMonth2 + '/12/' + currentYear2, y: Math.floor(Math.random() * 60)
-      },
-      {
-        x: currentMonth3 + '/12/' + currentYear3, y: Math.floor(Math.random() * 60)
-      },
-      {
-        x: currentMonth4 + '/12/' + currentYear4, y: Math.floor(Math.random() * 60)
-      },
-      {
-        x: this.currentMonth + '/12/' + currentYear, y: Math.floor(Math.random() * 60)
-      }
-    ];
-    this.chart2.data.datasets[0].data = newData1;
-    this.chart2.data.datasets[1].data = newData2;
-    this.chart2.data.datasets[2].data = newData3;
-    this.chart2.data.datasets[3].data = newData4;
-    this.chart2.update();
+    this.chart1.data.datasets[0].data = newData1;
+    this.chart1.data.datasets[1].data = newData2;
+    this.chart1.data.datasets[2].data = newData3;
+    console.log(newData1, newData2, newData3);
+    this.chart1.update();
     this.currentYear = Math.max(currentYear, currentYear1, currentYear2, currentYear3, currentYear4);
   }
 }

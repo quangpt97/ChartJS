@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 // import * as Chart from 'chart.js';
 
+// declare var $: any;
 
 @Component({
   selector: 'app-chart2',
@@ -296,7 +297,7 @@ export class Chart2Component implements OnInit {
         },
         hover: {
           onHover: function (e, el) {
-            $('#canvas2').css('cursor', el[0] ? 'pointer' : 'default');
+            // $('#canvas2').css('cursor', el[0] ? 'pointer' : 'default');
           }
         },
         onHover: function () {
