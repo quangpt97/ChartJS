@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 // import * as Chart from 'chart.js';
 
-// declare var $: any;
+declare var $: any;
 
 @Component({
   selector: 'app-chart2',
@@ -286,6 +286,19 @@ export class Chart2Component implements OnInit {
           duration: 0,
           onComplete: function () {
             const ctx = this.chart.ctx;
+            const right = this.chart.chartArea.right;
+            const leftOfChart = this.chart.chartArea.left;
+            const bottom = this.chart.chartArea.bottom;
+            // console.log(this.data.datasets);
+            const max = this.data.datasets[0].data.length;
+            console.log(this.data.datasets[0].data[max - 1].x);
+            console.log(this.data.datasets[0].data[0].x);
+            const yearMax = new Date(this.data.datasets[0].data[max - 1].x).getFullYear();
+            const yearMin = new Date(this.data.datasets[0].data[0].x).getFullYear();
+            // draw year in x axis
+            ctx.fillStyle = '#333';
+            ctx.fillText(yearMax, right - 15, bottom + 30);
+            ctx.fillText(yearMin, leftOfChart - 10, bottom + 30);
             this.data.datasets.map(dataset => {
               const lastestData = dataset._meta[1].data.length - 1;
               const left = dataset._meta[1].data[lastestData]._model.x;
@@ -297,7 +310,7 @@ export class Chart2Component implements OnInit {
         },
         hover: {
           onHover: function (e, el) {
-            // $('#canvas2').css('cursor', el[0] ? 'pointer' : 'default');
+            $('#canvas2').css('cursor', el[0] ? 'pointer' : 'default');
           }
         },
         onHover: function () {
@@ -322,7 +335,7 @@ export class Chart2Component implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              padding: 25,
+              padding: 10,
               callback: function (value) {
                 return '    ' + value + '件';
               },
@@ -346,7 +359,7 @@ export class Chart2Component implements OnInit {
             time: {
               unit: 'month',
               displayFormats: {
-                'month': 'M月Y',
+                'month': 'M月',
                 quarter: 'YYYY'
               },
               tooltipFormat: 'YYYY年MM月DD日',
@@ -414,8 +427,8 @@ export class Chart2Component implements OnInit {
     this.clickBack = 1;
     this.clickNext = 0;
     let currentYear = this.currentYear;
-    console.log(this.currentMonth);
-    console.log(this.currentYear);
+    // console.log(this.currentMonth);
+    // // console.log(this.currentYear);
 
     if (this.currentMonth - 5 > 0) {
       this.currentMonth -= 5;
@@ -423,7 +436,7 @@ export class Chart2Component implements OnInit {
       this.currentMonth = 12 + this.currentMonth - 5;
       currentYear -= 1;
     }
-    console.log(this.currentMonth);
+    // console.log(this.currentMonth);
 
     let currentMonth1 = this.currentMonth + 1;
     let currentMonth2 = this.currentMonth + 2;
@@ -456,11 +469,11 @@ export class Chart2Component implements OnInit {
         currentYear4 += 1;
       }
     }
-    console.log(currentYear1);
-    console.log(currentYear2);
-    console.log(currentYear3);
-    console.log(currentYear4);
-    console.log(currentYear);
+    // console.log(currentYear1);
+    // console.log(currentYear2);
+    // console.log(currentYear3);
+    // console.log(currentYear4);
+    // console.log(currentYear);
 
     const newData1 = [
       {
@@ -552,10 +565,10 @@ export class Chart2Component implements OnInit {
     this.clickNext = 1;
     this.clickBack = 0;
 
-    console.log(this.currentMonth);
+    // console.log(this.currentMonth);
     let currentYear = this.currentYear;
 
-    console.log(this.currentYear);
+    // console.log(this.currentYear);
 
     if (this.currentMonth + 5 <= 12) {
       this.currentMonth += 5;
@@ -563,7 +576,7 @@ export class Chart2Component implements OnInit {
       this.currentMonth = this.currentMonth + 5 - 12;
       currentYear += 1;
     }
-    console.log(this.currentMonth);
+    // console.log(this.currentMonth);
 
     let currentMonth1 = this.currentMonth - 4;
     let currentMonth2 = this.currentMonth - 3;
@@ -596,11 +609,11 @@ export class Chart2Component implements OnInit {
         currentYear4 -= 1;
       }
     }
-    console.log(currentYear1);
-    console.log(currentYear2);
-    console.log(currentYear3);
-    console.log(currentYear4);
-    console.log(currentYear);
+    // console.log(currentYear1);
+    // console.log(currentYear2);
+    // console.log(currentYear3);
+    // console.log(currentYear4);
+    // console.log(currentYear);
 
     const newData1 = [
       {

@@ -149,8 +149,15 @@ export class Chart4Component implements OnInit {
           duration: 0,
           onComplete: function () {
             const ctx = this.chart.ctx;
+            // console.log(this.chart.scales);
+            // console.log(this.chart.chartArea.right);
+            const right = this.chart.chartArea.right;
+            const bottom = this.chart.chartArea.bottom;
+            ctx.fillStyle = '#333';
+            ctx.fillText('以上', right - 35, bottom + 30);
             // ctx.fillStyle = this.scale.textColor;
-            // console.log(this.data.datasets);
+            console.log(this.chart);
+            console.log(this.data.datasets);
             let max = this.data.datasets[0]._meta[3].data[0]._model.y;
             this.data.datasets.map(dataset => {
               const top = dataset._meta[3].data[0]._model.y;
