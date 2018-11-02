@@ -41,7 +41,6 @@ export class AppComponent implements OnInit {
         this.chartName = 'All';
       }
     }
-    this.chartName = chart;
     // console.log(this.chartName);
     // console.log(chartTitle);
   }
