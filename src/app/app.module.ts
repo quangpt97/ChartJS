@@ -12,7 +12,12 @@ import {Chart2Component} from './components/chart2/chart2.component';
 import {Chart3Component} from './components/chart3/chart3.component';
 import {Chart4Component} from './components/chart4/chart4.component';
 import {FormsModule} from '@angular/forms';
-
+import {HttpClientModule, HttpClient} from '@angular/common/http';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,10 +33,18 @@ import {FormsModule} from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }

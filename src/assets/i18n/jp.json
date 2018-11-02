@@ -1,25 +1,22 @@
 {
-  "page01" : {
-    "TITLE" : "シフト希望を募集",
-    "BODY" : "gopro",
-    "pTitle": "シフト希望を募集する期間と締切日時を設定し、スタッフにシフト希望の募集開始をお知らせします。",
-    "inputTitle": "募集期間",
-    "comment": "備考"
+  "chart01": {
+    "Title1": "アクティブユーザー411人",
+    "Title2": "2位／278社中",
+    "Month": "11月"
   },
-  "page02" : {
-    "TITLE" : "シフト希望を募集",
-    "BODY" : "gopro"
+  "chart02": {
+    "Title1": "メシセージ",
+    "Title2": "3位／278社中",
+    "Month": "11月"
   },
-  "page03" : {
-    "TITLE" : "スキル設定",
-    "BODY" : "gopro"
+  "chart03": {
+    "Title1": "面会回数 348回",
+    "Title2": "4位／278社中",
+    "Month": "11月"
   },
-  "page04" : {
-    "TITLE" : "スキル設定",
-    "BODY" : "gopro"
-  },
-  "page05" : {
-    "TITLE" : "チーム設定",
-    "BODY" : "gopro"
+  "chart04": {
+    "Title1": "面会回数",
+    "Title2": "",
+    "Month": "11月"
   }
 }

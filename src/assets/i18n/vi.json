@@ -1,22 +1,22 @@
 {
-  "page01" : {
-    "TITLE" : "Tìm kiếm hy vọng thay đổi",
-    "BODY" : "gopro"
+  "chart01": {
+    "Title1": "411 người dùng hoạt động",
+    "Title2": "Vị trí thứ 2/278 công ty",
+    "Month": "Tháng 11"
   },
-  "page02" : {
-    "TITLE" : "Tìm kiếm hy vọng thay đổi",
-    "BODY" : "gopro"
+  "chart02": {
+    "Title1": "Tin nhắn",
+    "Title2": "Vị trí thứ 3/278 công ty",
+    "Month": "Tháng 11"
   },
-  "page03" : {
-    "TITLE" : "Cài đặt kỹ năng",
-    "BODY" : "gopro"
+  "chart03": {
+    "Title1": "348 lượt truy cập",
+    "Title2": "Vị trí thứ 4/278 công ty",
+    "Month": "Tháng 11"
   },
-  "page04" : {
-    "TITLE" : "Cài đặt kỹ năng",
-    "BODY" : "gopro"
-  },
-  "page05" : {
-    "TITLE" : "Thiết lập nhóm",
-    "BODY" : "gopro"
+  "chart04": {
+    "Title1": "Số lượt truy cập",
+    "Title2": "",
+    "Month": "Tháng 11"
   }
 }

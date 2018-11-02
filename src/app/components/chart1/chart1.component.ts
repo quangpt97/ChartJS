@@ -1,7 +1,5 @@
-import {Component, OnInit, ViewChild, ViewChildren} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 // import * as Chart from 'chart.js';
-
-
 declare var $: any;
 
 @Component({
@@ -10,6 +8,8 @@ declare var $: any;
   styleUrls: ['./chart1.component.scss']
 })
 export class Chart1Component implements OnInit {
+
+
   chart1: any;
   backgroundColor1 = ['rgba(0, 0, 0,0.3)', 'rgba(96, 159, 238, 1)', 'rgba(195, 49, 51, 1)'];
   borderColor1 = ['rgba(0, 0, 0,0.3)', 'rgba(96, 159, 238, 1)', 'rgba(195, 49, 51, 1)'];
@@ -81,8 +81,8 @@ export class Chart1Component implements OnInit {
   ];
 
   constructor() {
-  }
 
+  }
 
   ngOnInit() {
 
@@ -93,7 +93,7 @@ export class Chart1Component implements OnInit {
         Chart.controllers.line.prototype.draw.call(this, ease);
         // Draw label and year in bottom
         let i = -1;
-        let yearOfFirstMonth =0;
+        let yearOfFirstMonth = 0;
         const ctx = this.chart.ctx;
         const right = this.chart.chartArea.right;
         const leftOfChart = this.chart.chartArea.left;
@@ -106,8 +106,9 @@ export class Chart1Component implements OnInit {
         ctx.font = 'normal 12px Arial Helvetica Neue Helvetica sans-serif';
         // ctx.fillText(yearMax, right - 15, bottom + 30);
         ctx.fillText(yearMin, leftOfChart - 10, bottom + 30);
-        console.log(this.chart.config.data.datasets[0].data);
+        // console.log(this.chart.config.data.datasets[0].data);
         this.chart.config.data.datasets[0].data.map((data, index) => {
+          // console.log(data);
           const month = new Date(data.x).getMonth();
           if (month === 0) {
             i = index;
@@ -126,9 +127,12 @@ export class Chart1Component implements OnInit {
             if (i > 0) {
               if (index === i && check === false) {
                 const firstMonthOfYear_Left = dataset._meta[0].data[i]._model.x;
+                // const firstMonthOfYear_Top = dataset._meta[0].data[i]._model.y;
+                // console.log('write');
                 ctx.fillStyle = '#999';
                 ctx.fillText(yearOfFirstMonth, firstMonthOfYear_Left - 10, bottom + 30);
                 check = true;
+                // console.log('gogo');
               }
             }
           });

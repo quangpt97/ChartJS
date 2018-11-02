@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 
 declare var $: any;
 
@@ -11,8 +12,15 @@ export class AppComponent implements OnInit {
   title = 'app';
   chartName = 'All';
   chartTitle: string;
+  userLang = navigator.language;
+
+  constructor(translate: TranslateService) {
+    translate.setDefaultLang('jp');
+    translate.use(this.userLang);
+  }
 
   ngOnInit(): void {
+    console.log(this.userLang);
   }
 
   selectChart(chart: string) {
@@ -42,12 +50,13 @@ export class AppComponent implements OnInit {
       }
     }
     // console.log(this.chartName);
+    // const chartTitle = (document.getElementById(this.chartName) as HTMLElement).innerHTML;
     // console.log(chartTitle);
   }
 
   printChart() {
     if (this.chartName === 'All') {
-     this.printAllChart();
+      this.printAllChart();
     } else {
       this.printSingleChart(this.chartTitle, this.chartName);
     }
@@ -63,7 +72,6 @@ export class AppComponent implements OnInit {
     win.document.write(
       `<html>
             <head>
-              <link rel="stylesheet" type="text/css" href="print.component.css">
             </head>
             <body onload="window.print();window.close();window.focus()">
               <p style="padding-left: 220px">${chartTitle}<br><span style="padding-left: 70px">${textMonth}</span></p>
@@ -90,7 +98,6 @@ export class AppComponent implements OnInit {
     win.document.write(
       `<html>
             <head>
-              <link rel="stylesheet" type="text/css" href="print.component.css">
             </head>
             <body onload="window.print();window.close();window.focus()">
               <p style="padding-left: 220px">${chartTitle1}<br><span style="padding-left: 70px">${textMonth}</span></p>

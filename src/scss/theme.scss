@@ -233,7 +233,7 @@ body{
   position: absolute;
   right: 0px;
   padding-left: 30px;
-  margin: 75px 10px 10px -20px;
+  margin: 40px 10px 10px -20px;
   color: #777777;
   font-size: 0.75rem;
 }
@@ -245,6 +245,7 @@ body{
   //width: 320px;
   height: 100%;
   .item-border {
+    border-bottom: 1px solid #7070708f;
   }
   .item-no-border {
     border-bottom: $border-white;
@@ -713,8 +714,9 @@ select {
   margin-left: -20px;
 }
 .right{
-  margin-right: 40px;
+  margin-right: 60px;
 }
 .text{
   text-align: center;
+  font-size: 1rem;
 }
