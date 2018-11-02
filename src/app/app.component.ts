@@ -37,10 +37,12 @@ export class AppComponent implements OnInit {
         this.chartTitle = 'chartTitle4';
         break;
       }
+      default: {
+        this.chartName = 'All';
+      }
     }
     this.chartName = chart;
     // console.log(this.chartName);
-    const chartTitle = (document.getElementById(this.chartName) as HTMLElement).innerHTML;
     // console.log(chartTitle);
   }
 
