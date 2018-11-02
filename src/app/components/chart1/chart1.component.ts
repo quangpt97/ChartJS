@@ -91,10 +91,56 @@ export class Chart1Component implements OnInit {
     Chart.controllers.LineWithLine = Chart.controllers.line.extend({
       draw: function (ease) {
         Chart.controllers.line.prototype.draw.call(this, ease);
+        // Draw label and year in bottom
+        let i = -1;
+        let yearOfFirstMonth =0;
+        const ctx = this.chart.ctx;
+        const right = this.chart.chartArea.right;
+        const leftOfChart = this.chart.chartArea.left;
+        const bottom = this.chart.chartArea.bottom;
+        const max = this.chart.config.data.datasets[0].data.length;
+        // const yearMax = new Date(this.chart.config.data.datasets[0].data[max - 1].x).getFullYear();
+        const yearMin = new Date(this.chart.config.data.datasets[0].data[0].x).getFullYear();
+        // draw year in x axis
+        ctx.fillStyle = '#999';
+        ctx.font = 'normal 12px Arial Helvetica Neue Helvetica sans-serif';
+        // ctx.fillText(yearMax, right - 15, bottom + 30);
+        ctx.fillText(yearMin, leftOfChart - 10, bottom + 30);
+        console.log(this.chart.config.data.datasets[0].data);
+        this.chart.config.data.datasets[0].data.map((data, index) => {
+          const month = new Date(data.x).getMonth();
+          if (month === 0) {
+            i = index;
+            yearOfFirstMonth = new Date(data.x).getFullYear();
+          }
+        });
+        let check = false;
+        this.chart.config.data.datasets.map(dataset => {
+          const lastestData = dataset._meta[0].data.length - 1;
+          const left = dataset._meta[0].data[lastestData]._model.x;
+          const top = dataset._meta[0].data[lastestData]._model.y;
+          ctx.fillStyle = dataset.backgroundColor;
+          ctx.font = 'normal 12px Arial Helvetica Neue Helvetica sans-serif';
+          ctx.fillText(dataset.label, left + 10, top + 4);
+          dataset._meta[0].data.map((data, index) => {
+            if (i > 0) {
+              if (index === i && check === false) {
+                const firstMonthOfYear_Left = dataset._meta[0].data[i]._model.x;
+                // const firstMonthOfYear_Top = dataset._meta[0].data[i]._model.y;
+                console.log('write');
+                ctx.fillStyle = '#999';
+                ctx.fillText(yearOfFirstMonth, firstMonthOfYear_Left - 10, bottom + 30);
+                check = true;
+                console.log('gogo');
+              }
+            }
+          });
 
+        });
+        // draw line
         if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
           const activePoint = this.chart.tooltip._active[0],
-            ctx = this.chart.ctx,
+            // ctx = this.chart.ctx,
             x = activePoint.tooltipPosition().x,
             topY = this.chart.scales['y-axis-0'].top,
             bottomY = this.chart.scales['y-axis-0'].bottom;
@@ -254,30 +300,6 @@ export class Chart1Component implements OnInit {
       options: {
         animation: {
           duration: 0,
-          onComplete: function () {
-            const ctx = this.chart.ctx;
-            // console.log(this.chart);
-            const right = this.chart.chartArea.right;
-            const leftOfChart = this.chart.chartArea.left;
-            const bottom = this.chart.chartArea.bottom;
-            // console.log(this.data.datasets);
-            const max = this.data.datasets[0].data.length;
-            console.log(this.data.datasets[0].data[max - 1].x);
-            console.log(this.data.datasets[0].data[0].x);
-            const yearMax = new Date(this.data.datasets[0].data[max - 1].x).getFullYear();
-            const yearMin = new Date(this.data.datasets[0].data[0].x).getFullYear();
-            // draw year in x axis
-            ctx.fillStyle = '#333';
-            ctx.fillText(yearMax, right - 15, bottom + 30);
-            ctx.fillText(yearMin, leftOfChart - 10, bottom + 30);
-            this.data.datasets.map(dataset => {
-              const lastestData = dataset._meta[0].data.length - 1;
-              const left = dataset._meta[0].data[lastestData]._model.x;
-              const top = dataset._meta[0].data[lastestData]._model.y;
-              ctx.fillStyle = dataset.backgroundColor;
-              ctx.fillText(dataset.label, left + 10, top + 4);
-            });
-          }
         },
         hover: {
           onHover: function (e, el) {

@@ -17,6 +17,36 @@ export class Chart4Component implements OnInit {
   }
 
   ngOnInit() {
+    Chart.defaults.BarWithLabel = Chart.defaults.bar;
+    Chart.controllers.BarWithLabel = Chart.controllers.bar.extend({
+      draw: function (ease) {
+        Chart.controllers.bar.prototype.draw.call(this, ease);
+
+        const ctx = this.chart.ctx;
+        const right = this.chart.chartArea.right;
+        const bottom = this.chart.chartArea.bottom;
+        ctx.fillStyle = '#999';
+        ctx.font = 'normal 12px Arial Helvetica Neue Helvetica sans-serif';
+        ctx.fillText('以上', right - 35, bottom + 30);
+        let max = this.chart.config.data.datasets[0]._meta[3].data[0]._model.y;
+        this.chart.config.data.datasets.map(dataset => {
+          const top = dataset._meta[3].data[0]._model.y;
+          if (max > top) {
+            max = top;
+          }
+        });
+        let count = 0;
+        this.chart.config.data.datasets.map(dataset => {
+          count += 5;
+          const left = dataset._meta[3].data[0]._model.x;
+          // console.log(left);
+          const text = dataset.label + '  ';
+          ctx.fillStyle = dataset.backgroundColor;
+          ctx.font = 'normal 12px Arial Helvetica Neue Helvetica sans-serif';
+          ctx.fillText(text, left - 20 + count, max - 40);
+        });
+      }
+    });
     const customTooltips = function (tooltip) {
       const borderColor4 = ['rgba(96, 159, 238, 1)', 'rgba(195, 49, 51, 1)'];
       let tooltipEl = document.querySelector('.tooltip') as HTMLElement;
@@ -114,7 +144,7 @@ export class Chart4Component implements OnInit {
 
     };
     this.chart4 = new Chart('canvas4', {
-      type: 'bar',
+      type: 'BarWithLabel',
       data: {
         labels: ['0回', '1回', '2回', '3回', '4回', '5回', '6回', '7回', '8回', '9回', '10回'],
         datasets: [
@@ -146,41 +176,7 @@ export class Chart4Component implements OnInit {
       },
       options: {
         animation: {
-          duration: 0,
-          onComplete: function () {
-            const ctx = this.chart.ctx;
-            // console.log(this.chart.scales);
-            // console.log(this.chart.chartArea.right);
-            const right = this.chart.chartArea.right;
-            const bottom = this.chart.chartArea.bottom;
-            ctx.fillStyle = '#333';
-            ctx.fillText('以上', right - 35, bottom + 30);
-            // ctx.fillStyle = this.scale.textColor;
-            console.log(this.chart);
-            console.log(this.data.datasets);
-            let max = this.data.datasets[0]._meta[3].data[0]._model.y;
-            this.data.datasets.map(dataset => {
-              const top = dataset._meta[3].data[0]._model.y;
-              if (max > top) {
-                max = top;
-              }
-              // console.log(max);
-            });
-            let count = 0;
-            this.data.datasets.map(dataset => {
-              count += 5;
-              const left = dataset._meta[3].data[0]._model.x;
-              // console.log(left);
-              const text = dataset.label + '  ';
-              ctx.fillStyle = dataset.backgroundColor;
-              ctx.fillText(text, left - 20 + count, max - 40);
-              // console.log(text);
-              // ctx.fillStyle = dataset.backgroundColor;
-              // console.log(ctx.fillStyle);
-              // console.log(dataset.backgroundColor);
-              // console.log(ctx);
-            });
-          }
+          duration: 0
         },
         onHover: function () {
         },
@@ -251,13 +247,13 @@ export class Chart4Component implements OnInit {
               return data.datasets[tooltipItem.datasetIndex].label + '   ' + dslabelamtY;
             },
           },
-          // mode: 'point',
-          // borderColor: 'red',
-          // displayColors: false,
-          // borderWidth: 2,
-          // yPadding: 10,
-          // xPadding: 10,
-          caretSize: 6,
+          mode: 'nearest',
+          // // borderColor: 'red',
+          // // displayColors: false,
+          // // borderWidth: 2,
+          // // yPadding: 10,
+          // // xPadding: 10,
+          // caretSize: 6,
           enabled: false
         }
       }
